@@ -1,0 +1,38 @@
+<html>
+
+<body>
+    <h1>Prompt to be used for RAG response</h1>
+    <textarea id="textInput" rows="10" cols="30" placeholder="Enter your text here..."></textarea><br>
+    <button onclick="sendText()">Send</button>
+
+    <h2>Response</h2>
+    <textarea id="responseOutput" rows="10" cols="30" readonly></textarea>
+
+    <script>
+        function sendText() {
+            const text = document.getElementById('textInput').value;
+            const xhr = new XMLHttpRequest();
+            const endpoint = `https://ieos-rag-poc.azurewebsites.net/api/ieos_rag_poc_query?query="${text}"`;
+
+            headers = {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': 'Content-Type',
+            }
+
+            metadata = {
+                method: 'GET',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'text/plain'
+                }
+            }
+
+            fetch(`https://ieos-rag-poc.azurewebsites.net/api/ieos_rag_poc_query?query="${text}"`, metadata).then(response => response.json()).then(data => document.getElementById('responseOutput').value = data)
+
+
+        }
+    </script>
+</body>
+
+</html>
