@@ -112,7 +112,7 @@ def ieos_rag_poc_query(req: func.HttpRequest) -> func.HttpResponse:
     Context: {results}
     """
 
-    openai.api_key = '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'
+    openai.api_key = ''
 
     response = openai.chat.completions.create(
         model="gpt-3.5-turbo-16k",
